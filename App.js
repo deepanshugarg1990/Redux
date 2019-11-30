@@ -1,18 +1,46 @@
-import React from 'react';
-import {StyleSheet, Text, View,} from 'react-native';
+import React, {Component} from 'react';
+import {StyleSheet,} from 'react-native';
+import CounterApp from "./src/CounterApp";
+import {createStore} from 'redux';
+import {Provider} from 'react-redux';
 
-import {Colors,} from 'react-native/Libraries/NewAppScreen';
+const initialState = {
+    counter: 0
+};
 
-const App = () => {
-    return (
-        <View>
+const reducer = (state = initialState, action) => {
 
-            <Text>Hello</Text>
-        </View>
-    );
+    switch (action.type) {
+        case 'INCREASE_COUNTER':
+            return {counter: state.counter + 1};
+        case 'DECREASE_COUNTER':
+            return {counter: state.counter - 1};
+    }
+    return state;
+};
+
+const store = createStore(reducer);
+
+class App extends Component {
+
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return (
+            <Provider store={store}>
+                <CounterApp/>
+            </Provider>
+        );
+    }
+
 };
 
 const styles = StyleSheet.create({
+    container: {
+        alignItems: 'center', flex: 1, justifyContent: 'center'
+    }
 
 });
 
