@@ -50,4 +50,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default connect(mapStateToProps)(CounterApp)
+export default connect(mapStateToProps, mapDispatchToProps)(CounterApp)
